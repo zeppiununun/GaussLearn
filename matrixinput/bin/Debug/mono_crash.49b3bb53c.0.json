@@ -1,0 +1,89 @@
+{
+  "protocol_version" : "0.0.2",
+  "configuration" : {
+    "version" : "5.18.0.240 (tarball Wed Jan 16 09:10:16 UTC 2019)",
+    "tlc" : "__thread",
+    "sigsgev" : "altstack",
+    "notifications" : "epoll",
+    "architecture" : "amd64",
+    "disabled_features" : "none",
+    "smallconfig" : "disabled",
+    "bigarrays" : "disabled",
+    "softdebug" : "enabled",
+    "interpreter" : "enabled",
+    "llvm_support" : "600",
+    "suspend" : "preemptive"
+  },
+  "memory" : {
+    "minor_gc_time" : "180755",
+    "major_gc_time" : "0",
+    "minor_gc_count" : "7",
+    "major_gc_count" : "0",
+    "major_gc_time_concurrent" : "0"
+ },
+  "threads" : [
+ {
+    "is_managed" : false,
+    "crashed" : false,
+    "managed_thread_ptr" : "0x0",
+    "native_thread_id" : "0x7f7a2dba7700",
+    "thread_info_addr" : "0x0",
+    "thread_name" : "Debugger agent",
+    "ctx" : {
+      "IP" : "0x7f7a308d282e",
+      "SP" : "0x7f7a2dba6940",
+      "BP" : "(nil)"
+  },
+    "unmanaged_frames" : [
+  {
+      "native_address" : "unregistered"
+   }
+
+  ]
+ },
+ {
+    "is_managed" : false,
+    "crashed" : true,
+    "managed_thread_ptr" : "0x0",
+    "native_thread_id" : "0x7f7a31485780",
+    "thread_info_addr" : "0x0",
+    "thread_name" : "mono",
+    "ctx" : {
+      "IP" : "0x7f7a304465c7",
+      "SP" : "0x7ffd39498888",
+      "BP" : "0x55763eb96e40"
+  },
+    "managed_frames" : [
+  {
+      "native_address" : "unregistered"
+   }
+
+  ],
+  "unmanaged_frames" : [
+ {
+    "native_address" : "unregistered"
+  }
+
+ ]
+},
+{
+  "is_managed" : false,
+  "crashed" : false,
+  "managed_thread_ptr" : "0x0",
+  "native_thread_id" : "0x7f7a2fe00700",
+  "thread_info_addr" : "0x0",
+  "thread_name" : "Finalizer",
+  "ctx" : {
+    "IP" : "0x7f7a308d16d6",
+    "SP" : "0x7f7a2fdffc80",
+    "BP" : "0x55763d84dd60"
+ },
+  "unmanaged_frames" : [
+ {
+    "native_address" : "unregistered"
+  }
+
+ ]
+}
+]
+}

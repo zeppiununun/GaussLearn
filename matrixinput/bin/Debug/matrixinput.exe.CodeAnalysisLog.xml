@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/xsl" href="c:\program files (x86)\microsoft visual studio\2019\community\team tools\static analysis tools\fxcop\Xml\CodeAnalysisReport.xsl"?>
+<FxCopReport Version="16.0">
+ <Targets>
+  <Target Name="C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\matrixinput.exe">
+   <Modules>
+    <Module Name="matrixinput.exe">
+     <Namespaces>
+      <Namespace Name="matrixinput">
+       <Types>
+        <Type Name="Gaussnew" Kind="Class" Accessibility="Public" ExternallyVisible="True">
+         <Members>
+          <Member Name="#Item[System.Int32,System.Int32]" Kind="Property" Static="False" Accessibility="Public" ExternallyVisible="True">
+           <Accessors>
+            <Accessor Name="#get_Item(System.Int32,System.Int32)" Kind="Method" Static="False" Accessibility="Public" ExternallyVisible="True">
+             <Messages>
+              <Message TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065" Status="Active" Created="2019-04-28 02:36:25Z" FixCategory="Breaking">
+               <Issue Name="PropertyGetter" Certainty="90" Level="Warning" Path="C:\Users\yatsy\Projects\matrixinput\matrixinput" File="Gaussnew.cs" Line="27">'Gaussnew.this.get(int, int)' erstellt eine Ausnahme vom Typ 'Exception', einem Ausnahmetyp, der nicht in einer Eigenschaft ausgelöst werden darf. Wenn diese Ausnahmeinstanz ausgelöst werden kann, verwenden Sie einen anderen Ausnahmetyp, konvertieren Sie diese Eigenschaft in eine Methode, oder ändern Sie die Logik dieser Eigenschaft so, dass keine Ausnahme ausgelöst wird.</Issue>
+              </Message>
+             </Messages>
+            </Accessor>
+           </Accessors>
+          </Member>
+         </Members>
+        </Type>
+       </Types>
+      </Namespace>
+     </Namespaces>
+    </Module>
+   </Modules>
+  </Target>
+ </Targets>
+ <Rules>
+  <Rule TypeName="DoNotRaiseExceptionsInUnexpectedLocations" Category="Microsoft.Design" CheckId="CA1065">
+   <Name>Keine Ausnahmen an unerwarteten Speicherorten auslösen</Name>
+   <Description>Es sollen keine Ausnahmen explizit an unerwarteten Speicherorten ausgelöst werden. Bei einigen Methoden, z. B. Equals und GetHashCode, erwarten Benutzer nicht, dass Ausnahmen ausgelöst werden. Aufrufe dieser Methoden werden daher meist nicht mit try-catch-Blöcken umschlossen.</Description>
+   <Resolution Name="PropertyGetter">{0} erstellt eine Ausnahme vom Typ {1}, einem Ausnahmetyp, der nicht in einer Eigenschaft ausgelöst werden darf. Wenn diese Ausnahmeinstanz ausgelöst werden kann, verwenden Sie einen anderen Ausnahmetyp, konvertieren Sie diese Eigenschaft in eine Methode, oder ändern Sie die Logik dieser Eigenschaft so, dass keine Ausnahme ausgelöst wird.</Resolution>
+   <Owner />
+   <Url>http://msdn.microsoft.com/library/bb386039.aspx</Url>
+   <Email>[none]</Email>
+   <MessageLevel Certainty="90">Error, Warning</MessageLevel>
+   <File Name="designrules.dll" Version="16.0.0.0" />
+  </Rule>
+ </Rules>
+ <Localized>
+  <String Key="Category">Kategorie</String>
+  <String Key="Certainty">Sicherheit</String>
+  <String Key="CollapseAll">Alle zuklappen</String>
+  <String Key="CheckId">Prüf-ID</String>
+  <String Key="Error">Fehler</String>
+  <String Key="Errors">Fehler</String>
+  <String Key="ExpandAll">Alle aufklappen</String>
+  <String Key="Help">Hilfe</String>
+  <String Key="Line">Zeile</String>
+  <String Key="Messages">Meldung(en)</String>
+  <String Key="LocationNotStoredInPdb">[Nicht in PDB gespeicherter Speicherort]</String>
+  <String Key="Project">Projekt</String>
+  <String Key="Resolution">Auflösung</String>
+  <String Key="Rule">Regel</String>
+  <String Key="RuleFile">Regeldatei</String>
+  <String Key="RuleDescription">Regelbeschreibung</String>
+  <String Key="Source">Quelle</String>
+  <String Key="Status">Status</String>
+  <String Key="Target">Ziel</String>
+  <String Key="Warning">Warnung</String>
+  <String Key="Warnings">Warnung(en)</String>
+  <String Key="ReportTitle">Codeanalysebericht</String>
+ </Localized>
+</FxCopReport>
