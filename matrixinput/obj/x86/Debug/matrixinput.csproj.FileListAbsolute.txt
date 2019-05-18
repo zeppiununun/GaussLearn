@@ -10,5 +10,8 @@ C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\matrixinput.pdb
 C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.csproj.CoreCompileInputs.cache
 C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.exe
 C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.pdb
-C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\matrixinput.exe.CodeAnalysisLog.xml
-C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\matrixinput.exe.lastcodeanalysissucceeded
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.csprojAssemblyReference.cache
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\CustomForm.dll
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\CustomForm.pdb
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Debug\CustomForm.dll.config
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.csproj.CopyComplete

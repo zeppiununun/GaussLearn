@@ -4,6 +4,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Reflection;
 using System.Drawing.Drawing2D;
+using CustomForm;
 
 namespace matrixinput
 {
@@ -54,7 +55,7 @@ namespace matrixinput
 
     }
 
-    public class RForm : Form
+    public class RForm : GaussForm
     {
         private TextBox[,] matrixinput;
         Panel panel1 = new Panel();
@@ -195,16 +196,19 @@ namespace matrixinput
             panel1.BackColor = Color.Transparent;
 
             addInputMask(rowsnum);
-           
-            ClientSize = new System.Drawing.Size(800, 800);
+            int h = Screen.PrimaryScreen.WorkingArea.Height;
+            int w = Screen.PrimaryScreen.WorkingArea.Width;
+
+            ClientSize = new System.Drawing.Size(h, w);
                       
-            //Controls.AddRange(labeleq);
-            Controls.Add(output);
-            Controls.Add(msize);
-            Controls.Add(labelsz);
-            Controls.Add(runBtn);
-            Controls.Add(bufferBtn);
-            Controls.Add(panel1);
+            //add Controls for a default form;
+
+            Add(output);
+            Add(msize);
+            Add(labelsz);
+            Add(runBtn);
+            Add(bufferBtn);
+            Add(panel1);
             msize.ValueChanged += new System.EventHandler(msize_ValueChanged);
 
             runBtn.Click+= new System.EventHandler(runBtn_click);
