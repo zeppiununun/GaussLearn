@@ -65,8 +65,6 @@ namespace matrixinput
         int rowsnum= 3;
 
         private  Gaussnew GV;
-
-
         
         public RForm()
         {
@@ -77,6 +75,9 @@ namespace matrixinput
 
         private void InitializeComponent()
         {
+            StartPosition = FormStartPosition.Manual;
+            Left = Screen.PrimaryScreen.WorkingArea.X + 50;
+            Top = Screen.PrimaryScreen.WorkingArea.Y +30;
             msize.Size = new System.Drawing.Size(45, 30);
             msize.Location = new System.Drawing.Point(50, 50);
             msize.Value = rowsnum;
@@ -84,12 +85,14 @@ namespace matrixinput
             msize.Minimum = 2;
 
             labelsz.Location = new System.Drawing.Point(50, 30);
+            labelsz.ForeColor= Color.GhostWhite;
             labelsz.Text = "Size:";
 
             runBtn.Size = new System.Drawing.Size(160, 100);
             runBtn.Location = new System.Drawing.Point(30, 90);
             runBtn.Text = "Run Gauß run!";
             runBtn.Font = new Font(runBtn.Font.FontFamily, 10);
+            runBtn.ForeColor = Color.GhostWhite;
             runBtn.BackColor = Color.Green;
             
             bufferBtn.Size = new System.Drawing.Size(45, 48);
@@ -135,7 +138,7 @@ namespace matrixinput
             Add(labelsz);
             Add(runBtn);
             Add(panel1);
-            Add(panel2);
+            //Add(panel2);
             msize.ValueChanged += new System.EventHandler(msize_ValueChanged);
 
             runBtn.Click += new System.EventHandler(runBtn_click);
@@ -144,11 +147,27 @@ namespace matrixinput
 
             Text = "Gaußsches Verfahren";
             BackColor = Color.Teal;
+            
+            
             output.MouseClick += new MouseEventHandler(output_onMouse_click);
             panel2.MouseClick += new MouseEventHandler(panel2_onMouse_click);
             panel1.MouseClick += new MouseEventHandler(panel_onMouse_click);
         }
+        //updates View when dimensions change
 
+        private void updateWindowSize()
+        {
+            wHeight = Screen.PrimaryScreen.WorkingArea.Height-50;
+            outHeight = wHeight - 150;
+            mWidth = 50 * (rowsnum + 1);
+            panel2.Size = new System.Drawing.Size(outWidth + 47, outHeight);
+            output.Size = new System.Drawing.Size(outWidth, outHeight);
+            panel1.Size = new Size(mWidth, mWidth - 50);
+            output.Location = new System.Drawing.Point(50, 0); ;
+            panel2.Location = new System.Drawing.Point(panel1.Location.X + mWidth, 10);
+            Size = new Size(panel1.Location.X + mWidth + outWidth + 90, wHeight);
+            Add(panel2);
+        }
         [System.STAThreadAttribute()]
         public static void Main()
         {
@@ -208,19 +227,7 @@ namespace matrixinput
                 ((TextBox)sender).BackColor = Color.White;
         }
 
-        private void updateWindowSize()
-        {
-            wHeight= Screen.PrimaryScreen.WorkingArea.Height;
-            outHeight = wHeight - 150;
-            mWidth = 50 * (rowsnum + 1);
-            panel2.Size = new System.Drawing.Size(outWidth+47, outHeight);
-            output.Size = new System.Drawing.Size(outWidth, outHeight);
-            panel1.Size = new Size(mWidth, mWidth - 50);
-            output.Location= new System.Drawing.Point(50,0); ;
-            panel2.Location = new System.Drawing.Point(panel1.Location.X + mWidth, 20);
-            //bufferBtn.Location = new System.Drawing.Point(panel1.Location.X + mWidth - 10, 0);
-            Size = new Size(panel1.Location.X + mWidth + outWidth + 90, wHeight);
-        }
+       
 
 
         
@@ -288,7 +295,7 @@ namespace matrixinput
                 addInputMask((int)msize.Value);
                 rowsnum = (int)msize.Value;
                 updateWindowSize();
-                Add(panel2);
+                
                              
             }
         }
