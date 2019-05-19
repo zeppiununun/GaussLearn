@@ -57,6 +57,11 @@ namespace matrixinput
 
     public class RForm : GaussForm
     {
+        private int wHeight;
+        private int wWidth;
+        private int outWidth=700;
+        private int mWidth;
+
         private TextBox[,] matrixinput;
         Panel panel1 = new Panel();
         private ShapedButton runBtn = new ShapedButton();
@@ -70,8 +75,6 @@ namespace matrixinput
 
         int rowsnum= 3;
 
-        //private Label timelabel = new System.Windows.Forms.Label();
-       // double[,] G = new double[3, 4] { { -5, 1, 7, 3 }, { 1, 2, -1, 2 }, { 3, -1, 11, 13 } };
         private  Gaussnew GV;
 
 
@@ -131,6 +134,7 @@ namespace matrixinput
             for (int i = 0; i < m; i++)
                 panel1.Controls.AddRange(labeleq);
 
+            
 
         }
 
@@ -145,17 +149,11 @@ namespace matrixinput
 
         private void InitializeComponent()
         {
-
-
-            output.Size = new System.Drawing.Size(700, 300);
-            output.Location = new System.Drawing.Point(50, 490);
-            output.Multiline = true;
-            output.Font = new Font("Courier New", 10, FontStyle.Bold);
-            output.ScrollBars = RichTextBoxScrollBars.ForcedBoth;
-            output.WordWrap= false;
-            output.Text = "";
-            output.ReadOnly = true;
-            output.BackColor = Color.GhostWhite;
+            int h = Screen.PrimaryScreen.WorkingArea.Height;
+            int w = Screen.PrimaryScreen.WorkingArea.Width;
+            wHeight = h - 150;
+            mWidth = 50 * (rowsnum + 1);
+            
 
             msize.Size = new System.Drawing.Size(45, 30);
             msize.Location = new System.Drawing.Point(50, 50);
@@ -170,15 +168,18 @@ namespace matrixinput
             runBtn.Location = new System.Drawing.Point(30, 90);
             runBtn.Text ="Run Gauß run!";
             runBtn.BackColor = Color.Green;
+            
 
-            bufferBtn.Size = new System.Drawing.Size(35, 40);
-            bufferBtn.Location = new System.Drawing.Point(750, 440);
-            bufferBtn.BackColor = Color.White;
-            Assembly myAssembly = Assembly.GetExecutingAssembly();
+            bufferBtn.Size = new System.Drawing.Size(45, 48);
+            bufferBtn.Location = new System.Drawing.Point(750, 20);
+            bufferBtn.BackColor = Color.Transparent;
+            bufferBtn.FlatStyle = FlatStyle.Flat;
+            bufferBtn.FlatAppearance.BorderSize = 0;
+            /*Assembly myAssembly = Assembly.GetExecutingAssembly();
             Stream myStream = myAssembly.GetManifestResourceStream("matrixinput.icon");
-            Icon myIcon = new Icon(myStream);
-            bufferBtn.Image = myIcon.ToBitmap();
-
+            Icon myIcon = new Icon(myStream);*/
+            //bufferBtn.Image = myIcon.ToBitmap();
+            bufferBtn.Image = Resource1.clipboard;
             cMenu = new ContextMenu();
             var copyItem = cMenu.MenuItems.Add("copy");
             copyItem.Click += new EventHandler(cMenu_ItemClicked);
@@ -191,23 +192,38 @@ namespace matrixinput
             clearItem.Click += new EventHandler(clear_ItemClicked);
             zeroItem.Click += new EventHandler(zero_ItemClicked);
 
-            panel1.Location = new Point(200, 10);
-            panel1.Size = new Size(550, 500);
+            
             panel1.BackColor = Color.Transparent;
 
             addInputMask(rowsnum);
-            int h = Screen.PrimaryScreen.WorkingArea.Height;
-            int w = Screen.PrimaryScreen.WorkingArea.Width;
+            Add(msize);
 
-            ClientSize = new System.Drawing.Size(h, w);
-                      
+            Size = new System.Drawing.Size(w-50, h);
+
             //add Controls for a default form;
+            panel1.Location = new Point(200, 10);
+            panel1.Size = new Size(mWidth, mWidth - 50);
+
+            output.Size = new System.Drawing.Size(700, wHeight);
+            output.Location = new System.Drawing.Point(panel1.Location.X + mWidth+35, 20);
+            output.Multiline = true;
+            output.Font = new Font("Courier New", 10, FontStyle.Bold);
+            output.ScrollBars = RichTextBoxScrollBars.ForcedBoth;
+            output.WordWrap = false;
+            output.Text = "";
+            output.ReadOnly = true;
+            output.BackColor = Color.GhostWhite;
+            bufferBtn.Location = new System.Drawing.Point(panel1.Location.X + mWidth - 10, 20);
+            Add(bufferBtn);
+            Size = new Size(panel1.Location.X + mWidth + outWidth + 40, wHeight + 150);
+
 
             Add(output);
-            Add(msize);
             Add(labelsz);
             Add(runBtn);
             Add(bufferBtn);
+          
+            
             Add(panel1);
             msize.ValueChanged += new System.EventHandler(msize_ValueChanged);
 
@@ -273,7 +289,15 @@ namespace matrixinput
                 clearInputMask(rowsnum);
                 addInputMask((int)msize.Value);
                 rowsnum = (int)msize.Value;
-
+                mWidth = 50 * (rowsnum + 1);
+                panel1.Size = new Size(mWidth, mWidth - 50);
+                output.Location = new System.Drawing.Point(panel1.Location.X + mWidth + 35, 20);
+                output.Size = new System.Drawing.Size(700, wHeight);
+                Add(output);
+                
+                bufferBtn.Location = new System.Drawing.Point(panel1.Location.X + mWidth-10, 20);
+                Add(bufferBtn);
+                Size = new Size(panel1.Location.X + mWidth + outWidth+40, wHeight+150);
             }
             }
 
