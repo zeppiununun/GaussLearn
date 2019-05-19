@@ -1,10 +1,21 @@
 ﻿<Properties StartupConfiguration="{EEEF4130-A4CB-4924-B903-5DC4C2560F46}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="matrixinput/matrixinput.cs">
     <Files>
-      <File FileName="matrixinput/matrixinput.cs" Line="19" Column="13" />
+      <File FileName="matrixinput/matrixinput.cs" Line="19" Column="10" />
       <File FileName="../Gauss/Gauss/Program.cs" Line="50" Column="31" />
       <File FileName="matrixinput/Gaussnew.cs" Line="129" Column="83" />
     </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="matrixinput" expanded="True">
+            <Node name="matrixinput" expanded="True">
+              <Node name="matrixinput.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.ItemProperties.matrixinput PreferredExecutionTarget="MonoDevelop.Default" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

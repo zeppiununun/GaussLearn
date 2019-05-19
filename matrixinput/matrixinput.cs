@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
-using System.IO;
-using System.Reflection;
 using System.Drawing.Drawing2D;
 using CustomForm;
 
@@ -150,10 +148,6 @@ namespace matrixinput
             runBtn.Click += new System.EventHandler(runBtn_click);
             bufferBtn.Click += new System.EventHandler(bufferBtn_click);
             copyItem.Click += new System.EventHandler(cMenu_ItemClicked);
-
-            
-            
-            
             output.MouseClick += new MouseEventHandler(output_onMouse_click);
             panel2.MouseClick += new MouseEventHandler(panel2_onMouse_click);
             panel1.MouseClick += new MouseEventHandler(panel_onMouse_click);
@@ -173,12 +167,7 @@ namespace matrixinput
             Size = new Size(panel1.Location.X + mWidth + outWidth + 90, wHeight);
             Add(panel2);
         }
-        [System.STAThreadAttribute()]
-        public static void Main()
-        {
-            System.Windows.Forms.Application.Run(new RForm());
-        }
-
+       
 
         private void clearInputMask(int m)
         {
@@ -461,6 +450,11 @@ namespace matrixinput
                 output.AppendText(Environment.NewLine);
             }
 
+        }
+        [System.STAThreadAttribute()]
+        public static void Main()
+        {
+            System.Windows.Forms.Application.Run(new RForm());
         }
 
 
