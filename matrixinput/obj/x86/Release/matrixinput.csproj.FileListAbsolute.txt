@@ -1,0 +1,11 @@
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Release\matrixinput.exe.config
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Release\matrixinput.exe
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Release\CustomForm.dll
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Release\CustomForm.pdb
+C:\Users\yatsy\Projects\matrixinput\matrixinput\bin\Release\CustomForm.dll.config
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Release\matrixinput.csprojAssemblyReference.cache
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Release\matrixinput.Resource1.resources
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Release\matrixinput.csproj.GenerateResource.cache
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Release\matrixinput.csproj.CoreCompileInputs.cache
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Release\matrixinput.csproj.CopyComplete
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Release\matrixinput.exe
