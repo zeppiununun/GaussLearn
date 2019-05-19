@@ -1,1 +1,1 @@
-Tutoring coding techniques and Gaussian elimination
+Tutoring on coding techniques and Gaussian elimination
