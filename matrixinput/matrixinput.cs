@@ -8,7 +8,9 @@ using CustomForm;
 
 namespace matrixinput
 {
-
+/* round run button
+ *
+ */
     public class ShapedButton : Button
     {
         Color BackColorOld;
@@ -42,7 +44,9 @@ namespace matrixinput
         }
 
     }
-
+    /* main form
+     * 
+     */
     public class RForm : GaussForm
     {
         private int wHeight;
@@ -69,8 +73,6 @@ namespace matrixinput
         public RForm()
         {
             this.InitializeComponent();
-           
-
         }
 
         private void InitializeComponent()
@@ -78,6 +80,10 @@ namespace matrixinput
             StartPosition = FormStartPosition.Manual;
             Left = Screen.PrimaryScreen.WorkingArea.X + 50;
             Top = Screen.PrimaryScreen.WorkingArea.Y +30;
+            Text = "Gaußsches Verfahren";
+            BackColor = Color.Teal;
+            this.iconBtn.Image = Resource1.gauss_sm;
+
             msize.Size = new System.Drawing.Size(45, 30);
             msize.Location = new System.Drawing.Point(50, 50);
             msize.Value = rowsnum;
@@ -145,15 +151,14 @@ namespace matrixinput
             bufferBtn.Click += new System.EventHandler(bufferBtn_click);
             copyItem.Click += new System.EventHandler(cMenu_ItemClicked);
 
-            Text = "Gaußsches Verfahren";
-            BackColor = Color.Teal;
+            
             
             
             output.MouseClick += new MouseEventHandler(output_onMouse_click);
             panel2.MouseClick += new MouseEventHandler(panel2_onMouse_click);
             panel1.MouseClick += new MouseEventHandler(panel_onMouse_click);
         }
-        //updates View when dimensions change
+        //updates view when the matrix dimension changes
 
         private void updateWindowSize()
         {
@@ -226,11 +231,7 @@ namespace matrixinput
             else
                 ((TextBox)sender).BackColor = Color.White;
         }
-
-       
-
-
-        
+                     
 
         private void panel_onMouse_click(object sender, MouseEventArgs e)
         {
@@ -443,8 +444,7 @@ namespace matrixinput
 
                     if (j == r-1)
                         output.AppendText("|");
-                    //;
-                }
+                    }
                 output.AppendText(Environment.NewLine);
                 }
             output.AppendText(Environment.NewLine);
