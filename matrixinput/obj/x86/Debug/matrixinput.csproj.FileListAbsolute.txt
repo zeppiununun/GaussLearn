@@ -16,3 +16,4 @@ C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.exe
 C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.pdb
 C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.Resource1.resources
 C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.csproj.GenerateResource.cache
+C:\Users\yatsy\Projects\matrixinput\matrixinput\obj\x86\Debug\matrixinput.csprojAssemblyReference.cache

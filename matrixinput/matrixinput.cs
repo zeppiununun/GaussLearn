@@ -31,24 +31,12 @@ namespace matrixinput
 
         protected override void OnMouseEnter(EventArgs e) // not needed really, but nice to have
         {
-            /*Graphics g = CreateGraphics();
-            Rectangle R = new Rectangle(2, 2, this.Width - 6, this.Height - 6);
-            Pen pen = new Pen(Color.Red, 1);
-            SolidBrush brush = new SolidBrush(Color.Red);
-            g.FillEllipse(brush,R);*/
             BackColorOld = BackColor;
             BackColor = ControlPaint.Light(BackColor);
-
-        
             base.OnMouseEnter(e);
         }
         protected override void OnMouseLeave(EventArgs e) // not needed really, but nice to have
         {
-            /*Graphics g = CreateGraphics();
-            Rectangle R = new Rectangle(2, 2, this.Width - 6, this.Height - 6);
-            Pen pen = new Pen(Color.Red, 1);
-            SolidBrush brush = new SolidBrush(Color.Red);
-            g.FillEllipse(brush,R);*/
             BackColor = BackColorOld;
             base.OnMouseLeave(e);
         }
@@ -58,12 +46,13 @@ namespace matrixinput
     public class RForm : GaussForm
     {
         private int wHeight;
-        private int wWidth;
-        private int outWidth=700;
+        private int outHeight;
+        private readonly int outWidth=700;
         private int mWidth;
 
         private TextBox[,] matrixinput;
         Panel panel1 = new Panel();
+        Panel panel2 = new Panel();
         private ShapedButton runBtn = new ShapedButton();
         private Button bufferBtn = new Button();
         private Label[] labeleq;
@@ -78,13 +67,86 @@ namespace matrixinput
         private  Gaussnew GV;
 
 
-        //private System.Windows.Forms.Label label1;
-
+        
         public RForm()
         {
             this.InitializeComponent();
            
 
+        }
+
+        private void InitializeComponent()
+        {
+            msize.Size = new System.Drawing.Size(45, 30);
+            msize.Location = new System.Drawing.Point(50, 50);
+            msize.Value = rowsnum;
+            msize.Maximum = 10;
+            msize.Minimum = 2;
+
+            labelsz.Location = new System.Drawing.Point(50, 30);
+            labelsz.Text = "Size:";
+
+            runBtn.Size = new System.Drawing.Size(160, 100);
+            runBtn.Location = new System.Drawing.Point(30, 90);
+            runBtn.Text = "Run Gauß run!";
+            runBtn.Font = new Font(runBtn.Font.FontFamily, 10);
+            runBtn.BackColor = Color.Green;
+            
+            bufferBtn.Size = new System.Drawing.Size(45, 48);
+            bufferBtn.BackColor = Color.Transparent;
+            bufferBtn.FlatStyle = FlatStyle.Flat;
+            bufferBtn.FlatAppearance.BorderSize = 0;
+            bufferBtn.Image = Resource1.clipboard;
+
+            cMenu = new ContextMenu();
+            var copyItem = cMenu.MenuItems.Add("Copy to clipboard");
+            copyItem.Click += new EventHandler(cMenu_ItemClicked);
+
+            mMenu = new ContextMenu();
+            var randomItem = mMenu.MenuItems.Add("Random fill");
+            var clearItem = mMenu.MenuItems.Add("Clear matrix");
+            var zeroItem = mMenu.MenuItems.Add("Set to zero");
+            randomItem.Click += new EventHandler(random_ItemClicked);
+            clearItem.Click += new EventHandler(clear_ItemClicked);
+            zeroItem.Click += new EventHandler(zero_ItemClicked);
+
+
+            panel1.BackColor = Color.Transparent;
+            panel2.BackColor = Color.GhostWhite;
+
+            addInputMask(rowsnum);
+            Add(msize);
+
+            //add Controls for a default form;
+            panel1.Location = new Point(200, 10);
+            output.Multiline = true;
+            output.Font = new Font("Courier New", 10, FontStyle.Bold);
+            output.ScrollBars = RichTextBoxScrollBars.ForcedBoth;
+            output.WordWrap = false;
+            output.Text = "";
+            output.ReadOnly = true;
+            output.BackColor = Color.GhostWhite;
+            output.BorderStyle = BorderStyle.None;
+            updateWindowSize();
+            output.Location = new Point(50, 0);
+            panel2.Controls.Add(output);
+            bufferBtn.Location = new Point(3, 3);
+            panel2.Controls.Add(bufferBtn);
+            Add(labelsz);
+            Add(runBtn);
+            Add(panel1);
+            Add(panel2);
+            msize.ValueChanged += new System.EventHandler(msize_ValueChanged);
+
+            runBtn.Click += new System.EventHandler(runBtn_click);
+            bufferBtn.Click += new System.EventHandler(bufferBtn_click);
+            copyItem.Click += new System.EventHandler(cMenu_ItemClicked);
+
+            Text = "Gaußsches Verfahren";
+            BackColor = Color.Teal;
+            output.MouseClick += new MouseEventHandler(output_onMouse_click);
+            panel2.MouseClick += new MouseEventHandler(panel2_onMouse_click);
+            panel1.MouseClick += new MouseEventHandler(panel_onMouse_click);
         }
 
         [System.STAThreadAttribute()]
@@ -146,100 +208,22 @@ namespace matrixinput
                 ((TextBox)sender).BackColor = Color.White;
         }
 
-
-        private void InitializeComponent()
+        private void updateWindowSize()
         {
-            int h = Screen.PrimaryScreen.WorkingArea.Height;
-            int w = Screen.PrimaryScreen.WorkingArea.Width;
-            wHeight = h - 150;
+            wHeight= Screen.PrimaryScreen.WorkingArea.Height;
+            outHeight = wHeight - 150;
             mWidth = 50 * (rowsnum + 1);
-            
-
-            msize.Size = new System.Drawing.Size(45, 30);
-            msize.Location = new System.Drawing.Point(50, 50);
-            msize.Value = rowsnum;
-            msize.Maximum = 10;
-            msize.Minimum = 2;
-
-            labelsz.Location = new System.Drawing.Point(50, 30);
-            labelsz.Text = "Size:";
-
-            runBtn.Size = new System.Drawing.Size(160, 100);
-            runBtn.Location = new System.Drawing.Point(30, 90);
-            runBtn.Text ="Run Gauß run!";
-            runBtn.BackColor = Color.Green;
-            
-
-            bufferBtn.Size = new System.Drawing.Size(45, 48);
-            bufferBtn.Location = new System.Drawing.Point(750, 20);
-            bufferBtn.BackColor = Color.Transparent;
-            bufferBtn.FlatStyle = FlatStyle.Flat;
-            bufferBtn.FlatAppearance.BorderSize = 0;
-            /*Assembly myAssembly = Assembly.GetExecutingAssembly();
-            Stream myStream = myAssembly.GetManifestResourceStream("matrixinput.icon");
-            Icon myIcon = new Icon(myStream);*/
-            //bufferBtn.Image = myIcon.ToBitmap();
-            bufferBtn.Image = Resource1.clipboard;
-            cMenu = new ContextMenu();
-            var copyItem = cMenu.MenuItems.Add("copy");
-            copyItem.Click += new EventHandler(cMenu_ItemClicked);
-
-            mMenu = new ContextMenu();
-            var randomItem = mMenu.MenuItems.Add("Random fill");
-            var clearItem = mMenu.MenuItems.Add("Clear matrix");
-            var zeroItem = mMenu.MenuItems.Add("Set to zero");
-            randomItem.Click += new EventHandler(random_ItemClicked);
-            clearItem.Click += new EventHandler(clear_ItemClicked);
-            zeroItem.Click += new EventHandler(zero_ItemClicked);
-
-            
-            panel1.BackColor = Color.Transparent;
-
-            addInputMask(rowsnum);
-            Add(msize);
-
-            Size = new System.Drawing.Size(w-50, h);
-
-            //add Controls for a default form;
-            panel1.Location = new Point(200, 10);
+            panel2.Size = new System.Drawing.Size(outWidth+47, outHeight);
+            output.Size = new System.Drawing.Size(outWidth, outHeight);
             panel1.Size = new Size(mWidth, mWidth - 50);
-
-            output.Size = new System.Drawing.Size(700, wHeight);
-            output.Location = new System.Drawing.Point(panel1.Location.X + mWidth+35, 20);
-            output.Multiline = true;
-            output.Font = new Font("Courier New", 10, FontStyle.Bold);
-            output.ScrollBars = RichTextBoxScrollBars.ForcedBoth;
-            output.WordWrap = false;
-            output.Text = "";
-            output.ReadOnly = true;
-            output.BackColor = Color.GhostWhite;
-            bufferBtn.Location = new System.Drawing.Point(panel1.Location.X + mWidth - 10, 20);
-            Add(bufferBtn);
-            Size = new Size(panel1.Location.X + mWidth + outWidth + 40, wHeight + 150);
-
-
-            Add(output);
-            Add(labelsz);
-            Add(runBtn);
-            Add(bufferBtn);
-          
-            
-            Add(panel1);
-            msize.ValueChanged += new System.EventHandler(msize_ValueChanged);
-
-            runBtn.Click+= new System.EventHandler(runBtn_click);
-            bufferBtn.Click += new System.EventHandler(bufferBtn_click);
-            copyItem.Click += new System.EventHandler(cMenu_ItemClicked);
-
-            Text = "Gaußsches Verfahren";
-            BackColor = Color.Teal;
-            output.MouseClick += new MouseEventHandler(output_onMouse_click);
-            panel1.MouseClick += new MouseEventHandler(panel_onMouse_click);
-            //  string[] resNames = Assembly.GetExecutingAssembly().GetManifestResourceNames();
-            // foreach (string resName in resNames)
-            //   writeLine(resName);
-
+            output.Location= new System.Drawing.Point(50,0); ;
+            panel2.Location = new System.Drawing.Point(panel1.Location.X + mWidth, 20);
+            //bufferBtn.Location = new System.Drawing.Point(panel1.Location.X + mWidth - 10, 0);
+            Size = new Size(panel1.Location.X + mWidth + outWidth + 90, wHeight);
         }
+
+
+        
 
         private void panel_onMouse_click(object sender, MouseEventArgs e)
         {
@@ -248,6 +232,20 @@ namespace matrixinput
 
                mMenu.Show(panel1, new System.Drawing.Point(e.X, e.Y));
             }
+        }
+
+        private void panel2_onMouse_click(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+
+                cMenu.Show(panel2, new System.Drawing.Point(e.X, e.Y));
+            }
+        }
+
+        private void output_onMouse_click(object sender, MouseEventArgs e)
+        {
+            panel2_onMouse_click(panel2,e);
         }
 
         private void clear_ItemClicked(object sender, EventArgs e)
@@ -289,17 +287,11 @@ namespace matrixinput
                 clearInputMask(rowsnum);
                 addInputMask((int)msize.Value);
                 rowsnum = (int)msize.Value;
-                mWidth = 50 * (rowsnum + 1);
-                panel1.Size = new Size(mWidth, mWidth - 50);
-                output.Location = new System.Drawing.Point(panel1.Location.X + mWidth + 35, 20);
-                output.Size = new System.Drawing.Size(700, wHeight);
-                Add(output);
-                
-                bufferBtn.Location = new System.Drawing.Point(panel1.Location.X + mWidth-10, 20);
-                Add(bufferBtn);
-                Size = new Size(panel1.Location.X + mWidth + outWidth+40, wHeight+150);
+                updateWindowSize();
+                Add(panel2);
+                             
             }
-            }
+        }
 
 
         Boolean inputData(out double[,] GM)
@@ -365,14 +357,7 @@ namespace matrixinput
         {
             clipboard_copy();
         }
-        private void output_onMouse_click(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Right)
-            {
-
-                cMenu.Show(output, new System.Drawing.Point(e.X, e.Y));
-            }
-        }
+       
 
             private void runBtn_click(object sender, System.EventArgs e)
         {
